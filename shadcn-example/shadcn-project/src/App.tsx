@@ -9,7 +9,7 @@ import {
   Package2,
 } from "lucide-react";
 
-import { Button } from "./components/ui/button";
+import { Button, buttonVariants } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { Badge } from "./components/ui/badge";
 import {
@@ -23,6 +23,7 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -139,17 +140,24 @@ export default function App() {
 
             {/* Clickable Username Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Button variant="secondary" className="flex gap-2 rounded-full">
-                  <User className="h-4 w-4" />
-                  <span className="hidden md:inline-flex">Jane Doe</span>
-                </Button>
+              <DropdownMenuTrigger
+                className={buttonVariants({
+                  variant: "secondary",
+                  className: "flex gap-2 rounded-full",
+                })}
+              >
+                <User className="h-4 w-4" />
+                <span className="hidden md:inline-flex">Jane Doe</span>
               </DropdownMenuTrigger>
+
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuGroup>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Settings</DropdownMenuItem>
+                  <DropdownMenuItem>Support</DropdownMenuItem>
+                </DropdownMenuGroup>
+
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Logout</DropdownMenuItem>
               </DropdownMenuContent>
