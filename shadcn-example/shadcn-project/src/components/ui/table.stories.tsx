@@ -24,6 +24,15 @@ const meta: Meta<typeof Table> = {
   title: "UI/Table",
   component: Table,
   tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "A responsive, accessible data table built with **shadcn/ui**. \n\n" +
+          "Use this component to display large amounts of structured data. It supports interactive rows, badging, and contextual dropdown actions.",
+      },
+    },
+  },
 };
 
 export default meta;
