@@ -9,6 +9,16 @@ import {
 } from "./table";
 import { Badge } from "./badge";
 import React from "react";
+import { MoreHorizontal } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+  DropdownMenuGroup,
+} from "./dropdown-menu";
 
 const meta: Meta<typeof Table> = {
   title: "UI/Table",
@@ -159,6 +169,95 @@ export const InteractiveRows: Story = {
             </TableBody>
           </Table>
         </div>
+      </div>
+    );
+  },
+};
+
+export const WithDropdownActions: Story = {
+  render: () => {
+    const data = [
+      {
+        id: "INV-001",
+        customer: "Acme Corp",
+        status: "Paid",
+        amount: "$2,500.00",
+      },
+      {
+        id: "INV-002",
+        customer: "Stark Enterprises",
+        status: "Overdue",
+        amount: "$8,400.00",
+      },
+      {
+        id: "INV-003",
+        customer: "Wayne Industries",
+        status: "Pending",
+        amount: "$1,200.00",
+      },
+    ];
+
+    return (
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Invoice ID</TableHead>
+              <TableHead>Customer</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right">Amount</TableHead>
+              <TableHead className="w-[50px]">
+                <span className="sr-only">Actions</span>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell className="font-medium">{row.id}</TableCell>
+                <TableCell>{row.customer}</TableCell>
+                <TableCell>
+                  <Badge
+                    variant={
+                      row.status === "Overdue" ? "destructive" : "default"
+                    }
+                  >
+                    {row.status}
+                  </Badge>
+                </TableCell>
+                <TableCell className="text-right">{row.amount}</TableCell>
+                <TableCell>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="inline-flex h-8 w-8 items-center justify-center rounded-md hover:bg-muted transition-colors outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                      <span className="sr-only">Open menu</span>
+                      <MoreHorizontal className="h-4 w-4" />
+                    </DropdownMenuTrigger>
+
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuGroup>
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem
+                          onClick={() => navigator.clipboard.writeText(row.id)}
+                        >
+                          Copy invoice ID
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>View customer</DropdownMenuItem>
+                        <DropdownMenuItem>
+                          View payment details
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem className="text-red-600 focus:text-red-600 focus:bg-red-100 dark:focus:bg-red-900/50">
+                          Delete invoice
+                        </DropdownMenuItem>
+                      </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     );
   },
