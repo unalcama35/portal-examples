@@ -215,7 +215,7 @@ export const WithDropdownActions: Story = {
               <TableHead>Customer</TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="text-right">Amount</TableHead>
-              <TableHead className="w-[50px]">
+              <TableHead className="w-[150px]">
                 <span className="sr-only">Actions</span>
               </TableHead>
             </TableRow>
